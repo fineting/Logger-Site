@@ -1,4 +1,3 @@
-// package.json (for Netlify Functions)
 {
   "name": "logger-netlify",
   "version": "1.0.0",
