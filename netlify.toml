@@ -6,21 +6,17 @@
 
 [functions]
   directory = "functions"
-  node_builder = "esbuild"
   external_node_modules = ["mongodb"]
   included_files = ["node_modules/mongodb/**"]
 
 [functions.logger]
-  included_files = []
-  node_builder = "esbuild"
+  external_node_modules = ["mongodb"]
 
 [functions.get-data]
-  included_files = []
-  node_builder = "esbuild"
+  external_node_modules = ["mongodb"]
 
 [functions.clear-data]
-  included_files = []
-  node_builder = "esbuild"
+  external_node_modules = ["mongodb"]
 
 [dev]
   framework = "#static"
@@ -43,7 +39,3 @@
     Access-Control-Allow-Origin = "*"
     Access-Control-Allow-Methods = "GET, POST, OPTIONS"
     Access-Control-Allow-Headers = "Content-Type, X-Password"
-
-# Environment variables template (add these in Netlify dashboard)
-# [context.production.environment]
-#   MONGODB_URI = "mongodb+srv://username:password@cluster.mongodb.net/logger"
